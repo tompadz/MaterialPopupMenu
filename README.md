@@ -27,7 +27,7 @@ Add the dependency
 
 ```gradle
 	dependencies {
-	    implementation 'com.github.tompadz:MaterialPopupMenu:1.0.0'
+	    implementation 'com.github.tompadz:MaterialPopupMenu:1.0.2'
 	}
 ```
 
