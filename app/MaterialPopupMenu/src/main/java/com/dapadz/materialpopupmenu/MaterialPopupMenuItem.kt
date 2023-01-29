@@ -88,5 +88,4 @@ class MaterialPopupMenuItem(context:Context, color:Int) : LinearLayout(context, 
             iconView.isVisible = value != null
             iconView.setImageDrawable(value)
         }
-
 }

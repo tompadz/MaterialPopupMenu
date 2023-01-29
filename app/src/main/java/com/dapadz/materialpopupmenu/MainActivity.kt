@@ -2,24 +2,25 @@ package com.dapadz.materialpopupmenu
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
+import android.widget.ImageView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val button = findViewById<Button>(R.id.button)
+        val button = findViewById<ImageView>(R.id.image)
         button.setOnClickListener {
-            showFolderMenu(it)
+            showMenu(it)
         }
     }
 
-    private fun showFolderMenu(v: View) {
+    private fun showMenu(v: View) {
         val config = MaterialPopupConfiguration.Builder()
-            .setTitle("Hello world")
+            .setTitle("Actions")
+            .blurEnable(true)
             .build()
         val menu = MaterialPopupMenu(
             context = this,
@@ -27,9 +28,8 @@ class MainActivity : AppCompatActivity() {
             config = config,
         )
         menu.setOnMenuItemClickListener {
-            Log.i("MENU_CLICK", it.title.toString())
+            Snackbar.make(this, v, it.title !!, 1000).show()
         }
-        menu.addMenu(R.menu.menu)
-        menu.show()
+        menu.addMenuAndShow(R.menu.menu)
     }
 }

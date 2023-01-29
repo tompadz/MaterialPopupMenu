@@ -2,7 +2,6 @@ package com.dapadz.materialpopupmenu
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import android.util.Log
 import android.view.*
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -14,7 +13,6 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.children
 import androidx.core.view.setPadding
 import androidx.core.view.updateLayoutParams
-import com.dapadz.chatnote.ui.views.popup_menu.OnMenuClickListener
 import com.dapadz.materialpopupmenu.Utils.Companion.dp
 import com.dapadz.materialpopupmenu.Utils.Companion.dpf
 import com.dapadz.materialpopupmenu.Utils.Companion.getHeightOfView
@@ -39,18 +37,16 @@ class MaterialPopupMenu(
     }
 
     //view const
-    private val MAX_WIDTH = 220f.dp()
-    private val MIN_WIDTH = 112f.dp()
+    private val MAX_WIDTH = 220f.dp() //from material.io
+    private val MIN_WIDTH = 112f.dp() //from material.io
     private val ROOT_CORNER_RADIUS = 8f.dpf()
 
     //config const
-    private val BACKGROUND_COLOR = config.backgroundColor
-        ?: context.getTypeColor(com.google.android.material.R.attr.colorSurface)
-    private val ITEMS_TEXT_COLOR = config.itemTextColor
-        ?: context.getTypeColor(com.google.android.material.R.attr.colorOnSurface)
+    private val BACKGROUND_COLOR = config.backgroundColor ?: context.getTypeColor(com.google.android.material.R.attr.colorSurface)
+    private val ITEMS_TEXT_COLOR = config.itemTextColor ?: context.getTypeColor(com.google.android.material.R.attr.colorOnSurface)
     private val BLUR_RADIUS = config.blurRadius
     private val DIM_AMONG = config.behindDimAmong
-    private val BLUR_ENABLE = config.useBlur
+    private val BLUR_ENABLE = config.enableBlur
 
     //views
     private lateinit var rootLayout : FrameLayout
@@ -256,7 +252,6 @@ class MaterialPopupMenu(
         MenuInflater(context).inflate(menuRes, menu)
         for (i in 0 until menu.size()) {
             val item : MenuItem = menu.getItem(i)
-            Log.e(TAG, item.groupId.toString())
             menuItems.add(item)
         }
         return menuItems
@@ -286,9 +281,15 @@ class MaterialPopupMenu(
     override fun showAsDropDown(anchor : View?) {
         if (anchor == null) return
         val anchorLeft = anchor.left
-        val width = - (contentView.getWidthOfView() / 2) + (anchor.width / 2)
-        if (width < anchorLeft) {
-            super.showAsDropDown(anchor, width, 10f.dp())
+        val anchorWidth = anchor.width
+        val xOffset = - (contentView.getWidthOfView() / 2) + (anchorWidth / 2)
+        val yOffset = 10f.dp()
+
+        if (anchorWidth > contentView.getWidthOfView()) {
+            super.showAsDropDown(anchor, xOffset, yOffset)
+            return
+        }else if (xOffset < anchorLeft) {
+            super.showAsDropDown(anchor, xOffset, yOffset)
         } else {
             super.showAsDropDown(anchor, 0, 10f.dp())
         }
