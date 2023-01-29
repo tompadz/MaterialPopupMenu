@@ -1,6 +1,8 @@
-# Material popup menu
+# Material popup menu 
 
 My vision of popup menu design from material.io <br>
+
+[![](https://jitpack.io/v/tompadz/MaterialPopupMenu.svg)](https://jitpack.io/#tompadz/MaterialPopupMenu)
 
 - The menu should be able to add a title;
 - Each menu list item should be highlighted with a Material Divider;
