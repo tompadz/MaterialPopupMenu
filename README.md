@@ -10,15 +10,15 @@ My vision of popup menu design from material.io <br>
 
 ![preview](https://github.com/tompadz/MaterialPopupMenu/blob/master/img/preview.gif)
 
-# Installation
+## Installation
 
 Add it in your root build.gradle at the end of repositories:
-
+	
 	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	   repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	    }
 	}
 
 Add the dependency
@@ -27,11 +27,11 @@ Add the dependency
 	    implementation 'com.github.tompadz:MaterialPopupMenu:1.0.0'
 	}
 
-# Usage
+## Usage
 
 Create xml menu file
 
-
+```xml
     <menu>
         <item
             android:icon="@drawable/ic_settings"
@@ -46,9 +46,11 @@ Create xml menu file
             android:icon="@drawable/ic_search"
             android:title="Search" />
     </menu>
+```
 
 Create and show popup menu
 
+```kotlin
     private fun showMenu(view: View) {
         val menu = MaterialPopupMenu(
             context = this,
@@ -56,11 +58,13 @@ Create and show popup menu
         )
         menu.addMenuAndShow(R.menu.menu)
     }
+```
 
-# Customization
+## Customization
 
 To customize the menu, you need to create a configuration and pass it to the menu constructor
 
+```kotlin
     val config = MaterialPopupConfiguration.Builder()
             .setTitle("Actions")
             .blurEnable(true)
@@ -71,8 +75,9 @@ To customize the menu, you need to create a configuration and pass it to the men
             view = view,
             config = config,
     )
+```
 
-Configuration params
+### Configuration params
 
 | Code                      | Description                                                                                                                                |
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
@@ -84,11 +89,12 @@ Configuration params
 | .setBehindDimAmong(float) | Sets the value for dimming the background when a menu appears. <br> Default `0.3f`                                                         |
 
 
-Menu display options
+### Menu display options
 
 There are many ways to show a menu, the easiest one is to call the `menu.addMenuAndShow(R.menu.menu)` method <br>
 It is not necessary to call the menu immediately after creation, it is possible to separate these functions
 
+```kotlin
     val menu = MaterialPopupMenu(
             context = this,
             view = view,
@@ -96,9 +102,11 @@ It is not necessary to call the menu immediately after creation, it is possible 
     menu.addMenu(R.menu.menu)
     ....
     menu.show()
+```
 
 Since the menu is a `PopupWindow`, you have the ability to call the menu in any possible method from the api
 
+```kotlin
     val menu = MaterialPopupMenu(
             context = this,
             view = view,
@@ -106,15 +114,18 @@ Since the menu is a `PopupWindow`, you have the ability to call the menu in any 
     menu.addMenu(R.menu.menu)
     ....
     menu.showAsDropDown(view)
+```
 
-# Click handling
+## Click handling
 
 to handle clicking, you need to call the `setOnMenuItemClickListener` method on the menu. 
 
+```kotlin
       menu.setOnMenuItemClickListener { menuItem ->
           Snackbar.make(this, view, menuItem.title !!, 1000).show()
       }
+```
 
-# Support Libraries
+## Support Libraries
 
 For displaying a blur as a menu background, I use a great library [RealtimeBlurView](https://github.com/mmin18/RealtimeBlurView)
