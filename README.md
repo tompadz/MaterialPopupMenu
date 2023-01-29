@@ -8,7 +8,8 @@ My vision of popup menu design from material.io <br>
 - Each menu list item should be highlighted with a Material Divider;
 - Each item in the menu list must have a title and an icon;
 
-![preview](https://github.com/tompadz/MaterialPopupMenu/blob/master/img/preview.gif)
+|![screenshot](https://github.com/tompadz/MaterialPopupMenu/blob/master/img/preview.jpeg?raw=true)|![screenshot](https://github.com/tompadz/MaterialPopupMenu/blob/master/img/preview2.gif?raw=true)|
+|--|--|
 
 ## Installation
 
