@@ -13,19 +13,23 @@ My vision of popup menu design from material.io <br>
 ## Installation
 
 Add it in your root build.gradle at the end of repositories:
-	
+
+```gradle	
 	allprojects {
 	   repositories {
 		...
 		maven { url 'https://jitpack.io' }
 	    }
 	}
+```
 
 Add the dependency
 
+```gradle
 	dependencies {
 	    implementation 'com.github.tompadz:MaterialPopupMenu:1.0.0'
 	}
+```
 
 ## Usage
 
