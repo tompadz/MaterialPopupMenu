@@ -1,12 +1,28 @@
-# Material popup menu 
+# Material popup menu [![](https://jitpack.io/v/tompadz/MaterialPopupMenu.svg)](https://jitpack.io/#tompadz/MaterialPopupMenu)
 
 My vision of popup menu design from material.io <br>
 
-[![](https://jitpack.io/v/tompadz/MaterialPopupMenu.svg)](https://jitpack.io/#tompadz/MaterialPopupMenu)
+### Table of Contents
+
+1. [Design principles](https://github.com/tompadz/MaterialPopupMenu#design-principles)
+2. [Installation](https://github.com/tompadz/MaterialPopupMenu#installation)
+3. [Usage](https://github.com/tompadz/MaterialPopupMenu#usage)
+4. [Customization](https://github.com/tompadz/MaterialPopupMenu#customization)
+	- [Configuration params](https://github.com/tompadz/MaterialPopupMenu#configuration-params)
+	- [Menu display options](https://github.com/tompadz/MaterialPopupMenu#menu-display-options)
+5. [Click handling](https://github.com/tompadz/MaterialPopupMenu#click-handling)
+6. [Support Libraries](https://github.com/tompadz/MaterialPopupMenu#support-libraries)
+
+
+
+
+
+## Design principles
 
 - The menu should be able to add a title;
 - Each menu list item should be highlighted with a Material Divider;
 - Each item in the menu list must have a title and an icon;
+- The menu background should have a slight blur;
 
 |![screenshot](https://github.com/tompadz/MaterialPopupMenu/blob/master/img/preview2.jpeg?raw=true)|![screenshot](https://github.com/tompadz/MaterialPopupMenu/blob/master/img/preview2.gif?raw=true)|
 |--|--|
@@ -16,20 +32,20 @@ My vision of popup menu design from material.io <br>
 Add it in your root build.gradle at the end of repositories:
 
 ```gradle	
-	allprojects {
-	   repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	    }
-	}
+allprojects {
+   repositories {
+   	...
+	maven { url 'https://jitpack.io' }
+   }
+}
 ```
 
 Add the dependency
 
 ```gradle
-	dependencies {
-	    implementation 'com.github.tompadz:MaterialPopupMenu:1.0.2'
-	}
+dependencies {
+   implementation 'com.github.tompadz:MaterialPopupMenu:1.0.2'
+}
 ```
 
 ## Usage
@@ -37,32 +53,32 @@ Add the dependency
 Create xml menu file
 
 ```xml
-    <menu>
-        <item
-            android:icon="@drawable/ic_settings"
-            android:title="Position" />
-        <item
-            android:icon="@drawable/ic_edit"
-            android:title="Edit" />
-        <item
-            android:icon="@drawable/ic_delete"
-            android:title="Delete" />
-        <item
-            android:icon="@drawable/ic_search"
-            android:title="Search" />
-    </menu>
+<menu>
+   <item
+      android:icon="@drawable/ic_settings"
+      android:title="Position" />
+   <item
+      android:icon="@drawable/ic_edit"
+      android:title="Edit" />
+   <item
+      android:icon="@drawable/ic_delete"
+      android:title="Delete" />
+   <item
+      android:icon="@drawable/ic_search"
+      android:title="Search" />
+</menu>
 ```
 
 Create and show popup menu
 
 ```kotlin
-    private fun showMenu(view: View) {
-        val menu = MaterialPopupMenu(
-            context = this,
-            view = view,
-        )
-        menu.addMenuAndShow(R.menu.menu)
-    }
+private fun showMenu(view: View) {
+   val menu = MaterialPopupMenu(
+      context = this,
+      view = view,
+   )
+   menu.addMenuAndShow(R.menu.menu)
+}
 ```
 
 ## Customization
@@ -70,16 +86,16 @@ Create and show popup menu
 To customize the menu, you need to create a configuration and pass it to the menu constructor
 
 ```kotlin
-    val config = MaterialPopupConfiguration.Builder()
-            .setTitle("Actions")
-            .blurEnable(true)
-            .build()
+val config = MaterialPopupConfiguration.Builder()
+       .setTitle("Actions")
+       .blurEnable(true)
+       .build()
 
-    val menu = MaterialPopupMenu(
-            context = this,
-            view = view,
-            config = config,
-    )
+val menu = MaterialPopupMenu(
+      context = this,
+      view = view,
+      config = config,
+)
 ```
 
 ### Configuration params
@@ -100,25 +116,25 @@ There are many ways to show a menu, the easiest one is to call the `menu.addMenu
 It is not necessary to call the menu immediately after creation, it is possible to separate these functions
 
 ```kotlin
-    val menu = MaterialPopupMenu(
-            context = this,
-            view = view,
-    )
-    menu.addMenu(R.menu.menu)
-    ....
-    menu.show()
+val menu = MaterialPopupMenu(
+     context = this,
+     view = view,
+)
+menu.addMenu(R.menu.menu)
+....
+menu.show()
 ```
 
 Since the menu is a `PopupWindow`, you have the ability to call the menu in any possible method from the api
 
 ```kotlin
-    val menu = MaterialPopupMenu(
-            context = this,
-            view = view,
-    )
-    menu.addMenu(R.menu.menu)
-    ....
-    menu.showAsDropDown(view)
+val menu = MaterialPopupMenu(
+     context = this,
+     view = view,
+)
+menu.addMenu(R.menu.menu)
+....
+menu.showAsDropDown(view)
 ```
 
 ## Click handling
@@ -126,9 +142,9 @@ Since the menu is a `PopupWindow`, you have the ability to call the menu in any 
 to handle clicking, you need to call the `setOnMenuItemClickListener` method on the menu. 
 
 ```kotlin
-      menu.setOnMenuItemClickListener { menuItem ->
-          Snackbar.make(this, view, menuItem.title !!, 1000).show()
-      }
+menu.setOnMenuItemClickListener { menuItem ->
+  Snackbar.make(this, view, menuItem.title !!, 1000).show()
+}
 ```
 
 ## Support Libraries
